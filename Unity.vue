@@ -1,6 +1,6 @@
 <template>
   <div class="webgl-content">
-    <div :id="containerId" v-bind:style="{ width: width + 'px', height: height + 'px' }"></div>
+    <div :id="containerId" v-bind:style="{ height: height + 'px' }"></div>
     <div v-if="loaded == false">
       <div class="unity-loader">
         <div class="bar">
@@ -23,7 +23,7 @@ export default {
   data ()
   {
     return {
-      containerId: 'unity-container-' + Number( Math.random().toString().substr( 3, length ) + Date.now() ).toString( 36 ),
+      containerId: 'unity-container-' + Number( Math.random().toString().substr( 3, Math.random().toString().length ) + Date.now() ).toString( 36 ),
       gameInstance: null,
       loaded: false,
       progress: 0,
@@ -69,7 +69,7 @@ export default {
       script.setAttribute( 'src', this.unityLoader )
       script.setAttribute( 'async', '' )
       script.setAttribute( 'defer', '' )
-      document.body.appendChild( script )
+      document.head.appendChild( script )
       this.eventBus.load = true
       script.onload = () =>
       {
